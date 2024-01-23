@@ -1,0 +1,112 @@
+definition:
+  openapi: 3.0.3
+  info:
+    title: Student Form.
+  server:
+    url: http://localhost:4458
+  paths:
+    /getUsers:
+      get:
+        summary: List of users
+        tags:
+          - users
+        responses:
+          '200':
+            description: Success
+          '401':
+            description: Fail
+    /createUser:
+      post:
+        summary: Add user
+        tags:
+          - users
+        requestBody:
+          description: Enter User data.
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/createUser"
+        responses:
+          '200':
+            description: User is updated
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/createUser"
+          '401':
+            description: Fail
+    /deletUser:
+      post:
+        summary: Delet user
+        tags:
+          - users
+        parameters:
+          - in: query
+            name: userId
+            schema:
+              type: string
+              required: true
+              description: loggedInTenantId
+        responses:
+          '200':
+            description: User is updated
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/createUser"
+          '401':
+            description: Fail               
+    /api/updateUser:
+      post:
+        security:
+          - bearerAuth: []
+        summary: Update user
+        tags:
+          - users
+        parameters:
+          - in: query
+            name: userId
+            schema:
+              type: string
+              required: true
+              description: UserDataUpdated
+        requestBody:
+          description: Enter User data.
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/createUser"
+        responses:
+          '200':
+            description: User is updated
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/createUser"
+          '401':
+            description: Fail  
+  components:
+    securitySchemes:
+      bearerAuth:
+        type: http
+        scheme: bearer
+        bearerFormat: JWT
+    schemas:
+      createUser:
+        type: object
+        properties:
+          first_name:
+            type: string
+            example: keyur
+          last_name:
+            type: string
+            example: oza
+          email:
+            type: string
+            example: keyur@12.com
+          password:
+            type: string
+            example: keyur123                                 
+apis: ["./controllers/*.js"]       

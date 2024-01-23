@@ -10,9 +10,14 @@
   "author": "keyur oza",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "dotenv": "^16.3.1",
     "esm": "^3.2.25",
     "express": "^4.18.2",
-    "pg": "^8.11.3"
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.11.3",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0",
+    "yamljs": "^0.3.0"
   }
 }
