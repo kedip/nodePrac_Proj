@@ -3,6 +3,7 @@ import { connectToDatabase } from "./src/helpers/db";
 import route from "./src/routes";
 import dotenv from "dotenv";
 dotenv.config();
+const cors = require('cors');
 
 import swaggerUI from "swagger-ui-express";
 import swaggerJsDoc from "swagger-jsdoc";
@@ -11,6 +12,8 @@ import YAML from "yamljs";
 connectToDatabase();
 const app = express();
 
+app.use(cors());
+app.use(express.json());
 
 const specs = swaggerJsDoc(YAML.load('./studentForm.yml'));
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
